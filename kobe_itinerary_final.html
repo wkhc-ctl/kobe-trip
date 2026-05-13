@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神戶獨旅行程 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1814;--paper:#f5f0e8;--paper2:#ede8da;--accent:#8B4513;--gold:#c9a84c;--muted:#7a7060;--line:#d4cfc4;--food:#9b3a2a;--transport:#4a5568;--sight:#2d6a4f;--hotel:#553b8c;--star:#8B4513;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Serif TC',serif;background:var(--paper);color:var(--ink);min-height:100vh;}
+.wrap{max-width:720px;margin:0 auto;padding:2rem 1.25rem 4rem;}
+.hero{text-align:center;padding:2.5rem 0 2rem;border-bottom:1px solid var(--line);margin-bottom:2rem;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:1rem;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,42px);font-weight:700;line-height:1.15;color:var(--ink);}
+.hero-title span{color:var(--accent);}
+.hero-sub{font-size:13px;color:var(--muted);margin-top:0.75rem;line-height:1.7;}
+.hero-divider{width:40px;height:2px;background:var(--gold);margin:1.25rem auto 0;}
+.info-strip{display:flex;flex-wrap:wrap;gap:0;margin-bottom:1.5rem;border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+.info-cell{flex:1;min-width:120px;padding:10px 14px;border-right:1px solid var(--line);}
+.info-cell:last-child{border-right:none;}
+.info-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.info-val{font-size:13px;font-weight:500;color:var(--ink);margin-top:3px;}
+.hotel-bar{display:flex;align-items:flex-start;gap:12px;background:var(--paper2);border-left:3px solid var(--hotel);padding:12px 16px;margin-bottom:1.5rem;border-radius:0 4px 4px 0;}
+.hotel-bar-text{font-size:13px;color:var(--ink);line-height:1.5;}
+.hotel-bar-text strong{color:var(--hotel);}
+.cafe-banner{background:#f0f4f8;border:1px solid #c5d5e8;border-radius:4px;padding:14px 16px;margin-bottom:1.5rem;}
+.cafe-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#4a5568;text-transform:uppercase;margin-bottom:10px;}
+.cafe-list{display:flex;flex-direction:column;gap:8px;}
+.cafe-item{background:#fff;border:1px solid #c5d5e8;border-left:3px solid #4a6fa5;border-radius:0 3px 3px 0;padding:8px 12px;}
+.cafe-name{font-size:13px;font-weight:500;color:var(--ink);}
+.cafe-desc{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5;}
+.food-banner{background:#fdf6ee;border:1px solid #e8d5b0;border-radius:4px;padding:14px 16px;margin-bottom:1.5rem;}
+.food-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
+.food-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{font-size:12px;padding:4px 10px;border-radius:2px;background:#fff;border:1px solid #e0c990;color:var(--accent);}
+.day-nav{display:flex;gap:0;margin-bottom:0;border:1px solid var(--line);border-bottom:none;border-radius:4px 4px 0 0;overflow:hidden;}
+.day-tab{flex:1;padding:10px 4px;text-align:center;cursor:pointer;font-size:11px;color:var(--muted);background:var(--paper2);border-right:1px solid var(--line);transition:all 0.2s;line-height:1.4;font-family:'DM Mono',monospace;}
+.day-tab:last-child{border-right:none;}
+.day-tab.on{background:var(--ink);color:var(--paper);}
+.dnum{font-size:13px;font-weight:500;display:block;}
+.ddate{font-size:9px;letter-spacing:0.5px;display:block;margin-top:1px;}
+.day-panel{display:none;border:1px solid var(--line);border-radius:0 0 4px 4px;padding:1.5rem;}
+.day-panel.on{display:block;}
+.day-header{margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--line);}
+.day-theme{font-family:'Playfair Display',serif;font-size:20px;color:var(--ink);}
+.day-date-line{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:1px;}
+.timeline{position:relative;padding-left:22px;}
+.timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);}
+.titem{position:relative;margin-bottom:1.25rem;}
+.titem::before{content:'';position:absolute;left:-19px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--sight);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--sight);}
+.titem.tr::before{background:var(--transport);box-shadow:0 0 0 1px var(--transport);}
+.titem.fd::before{background:var(--food);box-shadow:0 0 0 1px var(--food);}
+.titem.ht::before{background:var(--hotel);box-shadow:0 0 0 1px var(--hotel);}
+.titem.st::before{background:var(--star);box-shadow:0 0 0 1px var(--star);}
+.ttime{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:2px;}
+.tname{font-size:14px;font-weight:500;color:var(--ink);}
+.tnote{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.6;}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.5px;padding:2px 7px;border-radius:2px;}
+.tag-s{background:#e8f4ef;color:var(--sight);}
+.tag-f{background:#faeae8;color:var(--food);}
+.tag-t{background:#eef0f4;color:var(--transport);}
+.tag-h{background:#eeebf7;color:var(--hotel);}
+.tag-g{background:#fdf6ee;color:var(--accent);border:1px solid #e8d5b0;}
+.rcard{margin-top:8px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--food);border-radius:0 3px 3px 0;padding:8px 12px;}
+.rcard-name{font-size:12px;font-weight:500;color:var(--ink);}
+.rcard-info{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.6;}
+.tip{background:#eef7f3;border-left:2px solid var(--sight);padding:10px 14px;margin-top:1rem;border-radius:0 3px 3px 0;}
+.tip p{font-size:12.5px;color:#2d5a45;line-height:1.65;}
+.warn{background:#fdf3e3;border-left:2px solid var(--gold);padding:10px 14px;margin-top:0.75rem;border-radius:0 3px 3px 0;}
+.warn p{font-size:12.5px;color:#7a5a1a;line-height:1.65;}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--line);}
+.leg{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="hero-eyebrow">Solo Travel · Kobe Japan</div>
+  <div class="hero-title">神戶<span>獨旅</span>行程</div>
+  <div class="hero-sub">2026年5月22日（五）至 5月27日（三）· 6天5夜<br>長榮航空 BR124 / BR123 · Brenza Hotel 三宮 · 每天9–10點出門</div>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="info-strip">
+  <div class="info-cell"><div class="info-label">去程</div><div class="info-val">BR124 06:20→10:05</div></div>
+  <div class="info-cell"><div class="info-label">回程</div><div class="info-val">BR123 16:00→18:10</div></div>
+  <div class="info-cell"><div class="info-label">住宿</div><div class="info-val">Brenza Hotel</div></div>
+  <div class="info-cell"><div class="info-label">步調</div><div class="info-val">慢旅・不趕場</div></div>
+</div>
+
+<div class="hotel-bar">
+  <div style="font-size:20px;flex-shrink:0">🏨</div>
+  <div class="hotel-bar-text"><strong>Brenza Hotel</strong>・中央區雲井通 6-1-1<br>三宮核心・機場巴士站在飯店正對面・步行可達JR/阪急/阪神三宮站</div>
+</div>
+
+<div class="cafe-banner">
+  <div class="cafe-title">☕ 推薦早餐咖啡廳（含冰美式）</div>
+  <div class="cafe-list">
+    <div class="cafe-item"><div class="cafe-name">にしむら珈琲 阪急前店</div><div class="cafe-desc">神戶60年老字號・冰咖啡750円・豆味濃郁均衡・三宮阪急站旁步行1分・早上就開・氣氛優雅不趕人</div></div>
+    <div class="cafe-item"><div class="cafe-name">コム・シノワ ブランジェリー（Comme Chinois）</div><div class="cafe-desc">法式主廚監製麵包・選好麵包搭冰美式在店內享用・克羅伊莎最推・三宮ビル南館B1F・Brenza步行3分</div></div>
+    <div class="cafe-item"><div class="cafe-name">BRENZA CAFE（飯店內）</div><div class="cafe-desc">Brenza Hotel 附設・0秒通勤・神戶在地食材・懶得出門的早晨首選</div></div>
+  </div>
+</div>
+
+<div class="food-banner">
+  <div class="food-title">⚑ 行程安排的必吃美食</div>
+  <div class="food-chips">
+    <span class="chip">🥩 Day1午 神戶牛 黒澤 or STEAKLAND</span>
+    <span class="chip">🍜 Day1晚 どうとんぼり神座</span>
+    <span class="chip">🍖 Day2午 とんかつ comocchi</span>
+    <span class="chip">♨️ Day2晚 萬葉俱樂部泡湯</span>
+    <span class="chip">🐙 Day3午 明石燒 TACHIBANA（北野下坡順路）</span>
+    <span class="chip">🌟 Day3晚 摩耶山掬星台夜景</span>
+    <span class="chip">📸 Day4 舞子公園・明石海峽大橋</span>
+    <span class="chip">🏯 Day4 姬路城</span>
+    <span class="chip">🍣 Day4晚 魚路 立食壽司（姬路駅直結）</span>
+    <span class="chip">🌿 Day5午前 布引香草園</span>
+    <span class="chip">🥩 Day5晚 長田本庄軒 牛筋炒麵</span>
+  </div>
+</div>
+
+<div class="day-nav">
+  <div class="day-tab on" onclick="sd(0)"><span class="dnum">Day 1</span><span class="ddate">5/22 五</span></div>
+  <div class="day-tab" onclick="sd(1)"><span class="dnum">Day 2</span><span class="ddate">5/23 六</span></div>
+  <div class="day-tab" onclick="sd(2)"><span class="dnum">Day 3</span><span class="ddate">5/24 日</span></div>
+  <div class="day-tab" onclick="sd(3)"><span class="dnum">Day 4</span><span class="ddate">5/25 一</span></div>
+  <div class="day-tab" onclick="sd(4)"><span class="dnum">Day 5</span><span class="ddate">5/26 二</span></div>
+  <div class="day-tab" onclick="sd(5)"><span class="dnum">Day 6</span><span class="ddate">5/27 三</span></div>
+</div>
+
+<!-- D1 -->
+<div id="p0" class="day-panel on">
+  <div class="day-header">
+    <div class="day-theme">抵達神戶・南京町・元町・港灣夜景</div>
+    <div class="day-date-line">2026 / 05 / 22（五）· 抵達日，輕鬆走就好</div>
+  </div>
+  <div class="timeline">
+    <div class="titem tr"><div class="ttime">06:20</div><div class="tname">桃園機場出發</div><div class="tnote">長榮 BR124，飛行約3小時45分</div><div class="tags"><span class="tag tag-t">長榮 BR124</span></div></div>
+    <div class="titem tr"><div class="ttime">10:05 抵達</div><div class="tname">神戶機場 → Port Liner → 三宮</div><div class="tnote">Port Liner 約18分抵達三宮站，步行5分至 Brenza Hotel，先寄放行李（check-in 下午3點）</div><div class="tags"><span class="tag tag-t">Port Liner 220円</span></div></div>
+    <div class="titem fd"><div class="ttime">11:00</div><div class="tname">咖啡廳早午餐</div><div class="tnote">放完行李先找間咖啡廳喝冰美式醒腦，にしむら珈琲或コム・シノワ都在附近</div><div class="tags"><span class="tag tag-f">早午餐</span></div></div>
+    <div class="titem fd"><div class="ttime">12:30</div><div class="tname">神戶牛 黒澤 or STEAKLAND（午餐・重頭戲）</div><div class="tnote">抵達第一餐就衝神戶牛！黒澤在元町路地裏，WEB限定早割ランチ全9品 2,980円；STEAKLAND 三宮站旁不用預約隨到隨坐 3,500円起</div>
+      <div class="rcard"><div class="rcard-name">📍 主選：神戶牛 黒澤</div><div class="rcard-info">元町通1-6-20 KCS 1F ／ 元町駅步行3分 ／ 11:00–15:00 ／ 強烈建議WEB預約<br>WEB限定「早割り神戶牛29ランチセット」全9品 2,980円 ／「神戶牛ステーキ重」赤身 3,520円</div></div>
+      <div class="rcard" style="margin-top:6px"><div class="rcard-name">📍 備位：STEAKLAND 神戶館</div><div class="rcard-info">三宮駅步行5分 ／ 無需預約・隨到隨坐 ／ 神戶牛150g午間套餐 3,500円起</div></div>
+    <div class="tags"><span class="tag tag-f">🥩 神戶牛午餐</span><span class="tag tag-g">黒澤建議預約</span></div></div>
+    <div class="titem"><div class="ttime">14:30</div><div class="tname">生田神社・南京町散步</div><div class="tnote">飯後步行消化，生田神社參拜求御守（步行約8分），再繞進南京町吃個小點，元町商店街隨意逛</div><div class="tags"><span class="tag tag-s">散步</span></div></div>
+    <div class="titem ht"><div class="ttime">17:00</div><div class="tname">Brenza Hotel Check-in・整頓</div><div class="tnote">辦理入住、盥洗休息，換裝準備出門吃拉麵</div><div class="tags"><span class="tag tag-h">Brenza Hotel</span></div></div>
+    <div class="titem fd"><div class="ttime">18:30</div><div class="tname">晚餐 — どうとんぼり神座</div><div class="tnote">大阪道頓堀名店，醬油清湯底加白菜的招牌「おいしいラーメン」，湯頭清爽不膩，旅程第一晚輕鬆吃一碗暖胃，三宮步行圈內兩間可選</div>
+      <div class="rcard"><div class="rcard-name">📍 どうとんぼり神座 三宮さんプラザ店</div><div class="rcard-info">三宮町1-8-1 さんプラザ B1F ／ 阪急神戶三宮駅步行2分<br>10:30–22:00 ／ 全年無休（元旦除外）／ 平均約760円</div></div>
+      <div class="rcard" style="margin-top:6px"><div class="rcard-name">📍 どうとんぼり神座 サンキタ通り店（深夜も可）</div><div class="rcard-info">北長狭通1-4-1 ／ 三宮駅步行3分<br>平日 11:00–23:00 ／ 金土祝前日 11:00–翌朝6:30 ／ 5/22（五）は23:00まで</div></div>
+    <div class="tags"><span class="tag tag-f">🍜 神座拉麵</span></div></div>
+    <div class="titem"><div class="ttime">20:00</div><div class="tname">神戶港塔・煉瓦倉庫夜間漫步</div><div class="tnote">飯後沿港邊隨意走，港塔・摩天輪燈光全開，拍夜景。若想登塔可在現場購票（入場費1,000円，22:00最終入場），360度觀景台夜間視野絕佳。走累了再搭車回飯店</div><div class="tags"><span class="tag tag-s">夜景散步</span><span class="tag tag-g">登塔 1,000円・22:00最終入場</span></div></div>
+  </div>
+  <div class="tip"><p>💡 黒澤建議出發前在官網或ぐるなび預約，訂不到就直接去 STEAKLAND。神座さんプラザ店就在 Brenza 步行2分，吃完宵夜可以直接走回去。</p></div>
+</div>
+
+<!-- D2 -->
+<div id="p1" class="day-panel">
+  <div class="day-header">
+    <div class="day-theme">神戶動物王國・とんかつ comocchi・萬葉俱樂部</div>
+    <div class="day-date-line">2026 / 05 / 23（六）· 動物＋豬排＋泡湯，輕鬆一天</div>
+  </div>
+  <div class="timeline">
+    <div class="titem fd"><div class="ttime">09:00</div><div class="tname">早餐咖啡廳</div><div class="tnote">今天不用趕，慢慢吃早餐出發</div><div class="tags"><span class="tag tag-f">早餐</span></div></div>
+    <div class="titem tr"><div class="ttime">10:00</div><div class="tname">三宮 → 神戶動物王國（Port Liner）</div><div class="tnote">三宮站搭 Port Liner 約14分，「計算科学センター駅」下車，步行1分即到。早點去人少好拍</div><div class="tags"><span class="tag tag-t">Port Liner 約14分</span></div></div>
+    <div class="titem"><div class="ttime">10:30</div><div class="tname">神戶動物王國</div><div class="tnote">全天候室內動植物園，卡皮巴拉、羊駝、鸚鵡飛越，幾乎沒有柵欄，動物近在眼前。5月花海搭配動物超好拍，所要約2–2.5小時</div>
+      <div class="rcard"><div class="rcard-name">📍 神戶動物王國</div><div class="rcard-info">10:00–17:00（週六日17:30）／ 入園大人2,200円<br>三宮Port Liner站服務台可買入園券＋來回乘車券優惠套票</div></div>
+    <div class="tags"><span class="tag tag-s">🦛 動物・花海</span></div></div>
+    <div class="titem tr"><div class="ttime">12:30</div><div class="tname">動物王國 → 三宮（Port Liner）</div><div class="tnote">返回三宮，步行3分到 comocchi</div><div class="tags"><span class="tag tag-t">Port Liner 返回</span></div></div>
+    <div class="titem fd"><div class="ttime">13:00</div><div class="tname">とんかつ comocchi（午餐）</div><div class="tnote">隱居風カウンター6席精品豬排，低溫慢炸銘柄豬，衣薄酥脆不油膩，土鍋炊飯。ランチ LO 13:30，記得準時回來</div>
+      <div class="rcard"><div class="rcard-name">📍 とんかつ comocchi（コモッチ）</div><div class="rcard-info">加納町4-10-3 ／ JR三ノ宮駅步行3分 ／ 火・水定休 ／ 5/23（六）OK<br>ランチ 11:30–14:30（LO 13:30）／ カウンター6席のみ・建議預約</div></div>
+    <div class="tags"><span class="tag tag-f">🍖 精品豬排</span><span class="tag tag-g">建議預約</span></div></div>
+    <div class="titem"><div class="ttime">15:00</div><div class="tname">午後自由時間</div><div class="tnote">吃完飯消化一下，三宮周邊隨意逛，元町商店街、舊居留地，或回飯店休息到晚上</div><div class="tags"><span class="tag tag-s">自由時間</span></div></div>
+    <div class="titem tr"><div class="ttime">18:00</div><div class="tname">前往 Harborland（JR 一站）</div><div class="tnote">JR 三宮站搭一站到神戶站，步行5分到 Harborland・萬葉俱樂部</div><div class="tags"><span class="tag tag-t">JR 神戶站</span></div></div>
+    <div class="titem fd"><div class="ttime">18:30</div><div class="tname">晚餐 — 摩賽克廣場</div><div class="tnote">泡湯前先吃晚餐，摩賽克廣場港景餐廳選一間坐下來</div><div class="tags"><span class="tag tag-f">港景晚餐</span></div></div>
+    <div class="titem st"><div class="ttime">20:00</div><div class="tname">萬葉俱樂部 泡湯・屋頂展望足湯</div><div class="tnote">18F屋上展望足湯海面105m高，邊泡腳邊俯瞰神戶夜景，大浴場到翌02:00，空手入場OK</div>
+      <div class="rcard"><div class="rcard-name">📍 萬葉俱樂部 神戶Harborland溫泉</div><div class="rcard-info">大浴場 05:00–翌02:00 ／ 展望足湯 06:00–24:00<br>日歸入浴料約2,000–3,000円 ／ 官網可下載優惠券</div></div>
+    <div class="tags"><span class="tag tag-g">♨️ 溫泉・屋頂夜景足湯</span></div></div>
+    <div class="titem tr"><div class="ttime">22:00</div><div class="tname">返回 Brenza Hotel</div><div class="tnote">JR 一站回三宮，步行5分回飯店</div><div class="tags"><span class="tag tag-t">JR 返回</span></div></div>
+  </div>
+  <div class="tip"><p>💡 動物王國早點去人少好拍，10:30開園時段最舒服。comocchi LO 13:30 要注意，從動物王國搭 Port Liner 回三宮約15分，12:30 出發剛剛好。</p></div>
+</div>
+
+<!-- D3 -->
+<div id="p2" class="day-panel">
+  <div class="day-header">
+    <div class="day-theme">明石燒・北野異人館・神戶牛・摩耶山夜景</div>
+    <div class="day-date-line">2026 / 05 / 24（日）· ⭐ 假日限定！掬星台夜景</div>
+  </div>
+  <div class="timeline">
+    <div class="titem fd"><div class="ttime">09:30</div><div class="tname">早餐 — コム・シノワ</div><div class="tnote">今天先吃早餐，買好麵包搭冰美式，慢慢坐著吃，準備上北野</div><div class="tags"><span class="tag tag-f">早餐</span></div></div>
+    <div class="titem"><div class="ttime">10:30</div><div class="tname">北野異人館街</div><div class="tnote">先上坡！空腹輕裝上北野最舒服，步行約15分，風見雞館・萌黃館・萊茵館（免費），星巴克異人館必訪</div><div class="tags"><span class="tag tag-s">文化・建築</span></div></div>
+    <div class="titem fd"><div class="ttime">12:00</div><div class="tname">明石燒 TACHIBANA（下坡順路）</div><div class="tnote">從北野下坡回三宮方向，順路經過 Center Gai，吃完剛好消化後再去下一個景點。先嚐原味再浸高湯，700円/份</div>
+      <div class="rcard"><div class="rcard-name">📍 TACHIBANA（たちばな）</div><div class="rcard-info">三宮町3-9-4 ／ 週四公休 ／ 10:00開始 ／ 店內禁止拍照 ／ 現場候位</div></div>
+    <div class="tags"><span class="tag tag-f">🐙 明石燒必吃</span></div></div>
+    <div class="titem fd"><div class="ttime">13:00</div><div class="tname">午餐 — 北野坂・三宮附近自選</div><div class="tnote">異人館逛完肚子也餓了，北野坂沿途有多間咖啡廳和洋食屋，隨意找間喜歡的坐下來</div><div class="tags"><span class="tag tag-f">午餐</span></div></div>
+    <div class="titem"><div class="ttime">14:30</div><div class="tname">舊居留地 飯後散步</div><div class="tnote">吃完飯消化一下，歐式建築隨手拍，走到港邊看看白天的神戶港，隨意逛，不買票</div><div class="tags"><span class="tag tag-s">散步</span></div></div>
+    <div class="titem ht"><div class="ttime">16:30</div><div class="tname">回 Brenza Hotel 休息・準備上山</div><div class="tnote">換上薄外套（山上比市區低5度），行動電源充飽，稍作休息</div><div class="tags"><span class="tag tag-h">準備</span></div></div>
+    <div class="titem tr"><div class="ttime">17:30</div><div class="tname">前往摩耶山 — 18號公車</div><div class="tnote">三宮JTB旅遊社前18號公車站牌，約25分至「摩耶ケーブル下」，210円。假日20–30分一班</div><div class="tags"><span class="tag tag-t">市巴士18號 210円</span></div></div>
+    <div class="titem st"><div class="ttime">18:10</div><div class="tname">摩耶登山纜車 → 摩耶空中纜車</div><div class="tnote">第一段登山纜車至虹の駅，轉第二段空中纜車至星の駅，務必買兩段來回票 1,540円</div><div class="tags"><span class="tag tag-g">來回票 1,540円</span></div></div>
+    <div class="titem st"><div class="ttime">19:00</div><div class="tname">摩耶山掬星台夜景</div><div class="tnote">標高690m，俯瞰神戶大阪灣V字形港灣夜景，「1000萬美元夜景」。星の駅2F CAFE 702可邊喝熱飲邊賞景，慢慢待不用趕</div><div class="tags"><span class="tag tag-g">🌟 日本三大夜景</span><span class="tag tag-g">假日限定</span></div></div>
+    <div class="titem tr"><div class="ttime">20:30</div><div class="tname">下山 → 18號公車返回三宮</div><div class="tnote">末班纜車約21點，下山人多需排隊等纜車，務必預留時間</div><div class="tags"><span class="tag tag-t">返回</span></div></div>
+    <div class="titem fd"><div class="ttime">22:00</div><div class="tname">宵夜 — 三宮居酒屋</div><div class="tnote">下山後輕鬆吃個宵夜，三宮深夜仍有許多居酒屋</div><div class="tags"><span class="tag tag-f">宵夜</span></div></div>
+  </div>
+  <div class="warn"><p>⚠️ 摩耶山夜間纜車假日才開放，5/24 週日完全符合。18號公車班次少，17:30 準時出發最保險。</p></div>
+  <div class="tip"><p>💡 路線：三宮JTB前 → 18號公車（210円）→ 摩耶ケーブル下 → 登山纜車 → 虹の駅 → 空中纜車 → 星の駅（掬星台）。全程約50分鐘。</p></div>
+</div>
+
+<!-- D4 -->
+<div id="p3" class="day-panel">
+  <div class="day-header">
+    <div class="day-theme">舞子公園・明石海峽大橋・姬路城</div>
+    <div class="day-date-line">2026 / 05 / 25（一）· 平日人少最舒服・中途停舞子拍照</div>
+  </div>
+  <div class="timeline">
+    <div class="titem fd"><div class="ttime">09:00</div><div class="tname">早餐咖啡廳</div><div class="tnote">今天是全程最長的一天，先吃飽再出發。附近咖啡廳快速吃個早餐</div><div class="tags"><span class="tag tag-f">早餐</span></div></div>
+    <div class="titem tr"><div class="ttime">09:40</div><div class="tname">三宮站 → JR舞子駅（JR新快速）</div><div class="tnote">約15分鐘，車資340円。Brenza Hotel 步行5分至三宮站</div><div class="tags"><span class="tag tag-t">JR 新快速 約15分</span></div></div>
+    <div class="titem"><div class="ttime">10:00</div><div class="tname">舞子公園・明石海峽大橋（約45分）</div><div class="tnote">出站步行約5分即到。西側可走到波打ち際橋正下方仰拍最震撼，東側也能拍到完整吊橋全景。拍完照就走，不需要花太多時間</div><div class="tags"><span class="tag tag-s">📸 明石海峽大橋</span></div></div>
+    <div class="titem tr"><div class="ttime">10:45</div><div class="tname">舞子駅 → 姬路站（JR新快速）</div><div class="tnote">約25分鐘，車資1,180円。三宮→舞子→姬路同一條JR路線，中途下車拍完照再上車</div><div class="tags"><span class="tag tag-t">JR 新快速 約25分</span></div></div>
+    <div class="titem"><div class="ttime">11:10</div><div class="tname">姬路城</div><div class="tnote">日本第一名城白鷺城，出站步行約15分。5月綠葉映白牆，平日人少排隊短，登天守閣俯瞰市景，門票1,000円。比原本早到，時間更充裕</div><div class="tags"><span class="tag tag-s">🏯 世界遺產</span><span class="tag tag-g">門票1,000円</span></div></div>
+    <div class="titem fd"><div class="ttime">13:30</div><div class="tname">午餐 — 姬路在地美食</div><div class="tnote">姬路名物「穴子飯（あなごめし）」，或駅前商店街隨意逛吃</div><div class="tags"><span class="tag tag-f">午餐</span></div></div>
+    <div class="titem"><div class="ttime">14:30</div><div class="tname">好古園（視體力決定）</div><div class="tnote">姬路城旁日式庭園，不趕的話進去坐一下很舒服，門票310円，可買姬路城聯票</div><div class="tags"><span class="tag tag-s">庭園</span></div></div>
+    <div class="titem fd"><div class="ttime">16:30</div><div class="tname">晚餐 — 立ち喰い寿司 魚路（ととろ）排隊</div><div class="tnote">姬路駅直結「ビエラ姫路」內，姬路最多人排隊的壽司店！想五點吃到建議四點半就到場排隊。一貫從75円起，招牌「極上一本穴子」整條穴子一貫400円，特上にぎりセット必點。週一營業沒問題</div>
+      <div class="rcard"><div class="rcard-name">📍 立ち喰い寿司 魚路（ととろ）</div><div class="rcard-info">姬路駅直結 ビエラ姫路內 ／ 步行0分 ／ 週日公休 ／ 無法預約・現場排隊<br>營業時間需出發前確認，平日常17:00開始晚間場</div></div>
+    <div class="tags"><span class="tag tag-f">🍣 立食壽司・姬路名店</span></div></div>
+    <div class="titem tr"><div class="ttime">18:00</div><div class="tname">姬路站 → 三宮站返回</div><div class="tnote">吃完搭 JR 新快速約40分回三宮，步行回 Brenza Hotel</div><div class="tags"><span class="tag tag-t">JR 新快速 約40分</span></div></div>
+  </div>
+  <div class="tip"><p>💡 三宮→舞子→姬路全程 JR 同一路線，舞子就是中途下車拍完照再繼續上車，不需換車。姬路城 + 好古園聯票更划算，但好古園視體力決定進不進去。</p></div>
+</div>
+
+<!-- D5 -->
+<div id="p4" class="day-panel">
+  <div class="day-header">
+    <div class="day-theme">布引香草園・atoa 水族館・臨海樂園</div>
+    <div class="day-date-line">2026 / 05 / 26（二）· 纜車上山＋港灣區慢逛</div>
+  </div>
+  <div class="timeline">
+    <div class="titem fd"><div class="ttime">09:00</div><div class="tname">早餐咖啡廳</div><div class="tnote">今天先往新神戶站方向出發，北野坂沿途找間咖啡廳吃早餐</div><div class="tags"><span class="tag tag-f">早餐</span></div></div>
+    <div class="titem tr"><div class="ttime">10:00</div><div class="tname">新神戶站 → 布引香草園（纜車）</div><div class="tnote">Brenza 步行約15分至新神戶站搭纜車上山，來回票含香草園入場1,500円。平日人少最悠閒</div><div class="tags"><span class="tag tag-t">纜車</span></div></div>
+    <div class="titem"><div class="ttime">10:30</div><div class="tname">布引香草園</div><div class="tnote">日本最大香草園，標高400m，5月薰衣草・鼠尾草正盛，俯瞰神戶港灣全景。中途站「風の丘駅」有景觀咖啡廳，可以在這裡坐一下再繼續上山，完全不用趕</div><div class="tags"><span class="tag tag-s">🌿 花園・景觀</span></div></div>
+    <div class="titem tr"><div class="ttime">12:30</div><div class="tname">下山 → 前往 atoa（Port Loop 巴士）</div><div class="tnote">下山後搭 Port Loop 巴士至新港町站，或步行約20分，抵達 atoa 藝術水族館</div><div class="tags"><span class="tag tag-t">Port Loop</span></div></div>
+    <div class="titem fd"><div class="ttime">13:00</div><div class="tname">午餐 — atoa 附近・新港エリア</div><div class="tnote">新港エリア周邊有幾間輕食餐廳，隨意選一間</div><div class="tags"><span class="tag tag-f">午餐</span></div></div>
+    <div class="titem"><div class="ttime">14:00</div><div class="tname">神戶 atoa 藝術水族館</div><div class="tnote">藝術×海洋劇場水族館，燈光裝置×海洋生物共存，不趕的話可以在裡面坐著放空。門票2,600円，所要約2小時</div><div class="tags"><span class="tag tag-s">🐠 藝術水族館</span><span class="tag tag-g">門票2,600円</span></div></div>
+    <div class="titem tr"><div class="ttime">16:00</div><div class="tname">atoa → 臨海樂園 umie（步行約15分）</div><div class="tnote">沿港邊步行，到 Harborland・umie</div><div class="tags"><span class="tag tag-t">步行約15分</span></div></div>
+    <div class="titem"><div class="ttime">16:30</div><div class="tname">臨海樂園 umie 逛街・最後採購</div><div class="tnote">北館＋南館超過200間店，伴手禮、服飾選物店，摩賽克廣場戶外吹海風</div>
+      <div class="rcard"><div class="rcard-name">📍 神戶臨海樂園 umie</div><div class="rcard-info">購物中心 10:00–20:00 ／ 餐廳 11:00–22:00 ／ JR神戶站步行5分</div></div>
+    <div class="tags"><span class="tag tag-s">🛍️ 逛街採購</span></div></div>
+    <div class="titem fd"><div class="ttime">19:00</div><div class="tname">晚餐 — 長田本庄軒 牛筋蒟蒻炒麵</div><div class="tnote">神戶庶民靈魂美食，牛筋軟糯搭Q彈蒟蒻，鐵板快炒鑊氣十足，以最道地的在地味為旅程收尾</div>
+      <div class="rcard"><div class="rcard-name">📍 長田本庄軒</div><div class="rcard-info">umie 附近或三宮周邊分店 ／ 點餐簡單 ／ 換桌率快</div></div>
+    <div class="tags"><span class="tag tag-f">🥩 牛筋炒麵・庶民美食</span></div></div>
+    <div class="titem tr"><div class="ttime">20:30</div><div class="tname">返回 Brenza Hotel</div><div class="tnote">JR 一站回三宮，步行5分回飯店，今晚好好休息，記得整理行李</div><div class="tags"><span class="tag tag-t">JR 返回</span></div></div>
+  </div>
+  <div class="tip"><p>💡 香草園平日人少最舒服，纜車中途「風の丘駅」有景觀咖啡廳，可以在這裡坐一下再繼續上山。atoa → umie 沿港邊步行約15分，景色很好，不用搭車。</p></div>
+</div>
+
+<!-- D6 -->
+<div id="p5" class="day-panel">
+  <div class="day-header">
+    <div class="day-theme">退房・返回台灣</div>
+    <div class="day-date-line">2026 / 05 / 27（三）· 長榮 BR123 16:00 出發</div>
+  </div>
+  <div class="timeline">
+    <div class="titem fd"><div class="ttime">09:00</div><div class="tname">最後早餐</div><div class="tnote">找間喜歡的咖啡廳坐著喝冰美式，慢慢回味這五天</div><div class="tags"><span class="tag tag-f">早餐</span></div></div>
+    <div class="titem ht"><div class="ttime">10:00</div><div class="tname">辦理退房</div><div class="tnote">行李可繼續寄放，輕裝做最後小逛</div><div class="tags"><span class="tag tag-h">退房</span></div></div>
+    <div class="titem fd"><div class="ttime">10:30</div><div class="tname">三宮最後補漏</div><div class="tnote">Brenza 旁 Center Gai，神戶風月堂法蘭酥、TORAKU 神戶布丁、藥妝補漏</div><div class="tags"><span class="tag tag-s">購物</span></div></div>
+    <div class="titem tr"><div class="ttime">12:30</div><div class="tname">Brenza Hotel 對面機場巴士 → 神戶機場</div><div class="tnote">機場巴士站就在飯店正對面，約20分直達，完全不需轉乘</div><div class="tags"><span class="tag tag-t">機場巴士</span></div></div>
+    <div class="titem tr"><div class="ttime">13:30</div><div class="tname">神戶機場辦理登機</div><div class="tnote">長榮 BR123，T2 國際航廈，免稅店選擇有限，伴手禮記得在市區買好</div><div class="tags"><span class="tag tag-t">神戶機場 UKB</span></div></div>
+    <div class="titem tr"><div class="ttime">16:00 出發</div><div class="tname">神戶 → 桃園・平安回家</div><div class="tnote">長榮 BR123，飛行約3小時10分，18:10抵達桃園</div><div class="tags"><span class="tag tag-t">長榮 BR123</span></div></div>
+  </div>
+  <div class="tip"><p>💡 回程班機16:00，時間充裕不用趕。Brenza Hotel 機場巴士在正對面，退房後直接拖行李去搭，神戶機場約20分鐘。</p></div>
+</div>
+
+<div class="legend">
+  <div class="leg"><div class="leg-dot" style="background:var(--sight)"></div>景點</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--food)"></div>美食</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--transport)"></div>交通</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--hotel)"></div>飯店</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--star)"></div>亮點</div>
+</div>
+
+</div>
+<script>
+function sd(i){
+  document.querySelectorAll('.day-panel').forEach((p,j)=>p.classList.toggle('on',j===i));
+  document.querySelectorAll('.day-tab').forEach((t,j)=>t.classList.toggle('on',j===i));
+}
+</script>
+</body>
+</html>
